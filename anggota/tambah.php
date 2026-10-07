@@ -1,0 +1,46 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$page_title = "Tambah Anggota";
+include __DIR__ . '/../includes/header.php';
+
+// Ambil notifikasi dari session, lalu hapus dari session
+$flash = $_SESSION['flash'] ?? null;
+unset($_SESSION['flash']);
+?>
+        <section>
+            <h2>Tambah Anggota</h2>
+
+            <?php if ($flash): ?>
+                <div class="alert alert-<?php echo htmlspecialchars($flash['type']); ?>" 
+                style="padding: 12px; margin-bottom: 15px; border-radius: 4px; color:
+                 #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb;">
+                    <?php echo htmlspecialchars($flash['pesan']); ?>
+                </div>
+            <?php endif; ?>
+
+            <form id="form-tambah" method="post" action="proses_tambah.php">
+                <p>
+                    <label for="nama">Nama</label><br>
+                    <input type="text" id="nama" name="nama" required>
+                </p>
+                <p>
+                    <label for="no_anggota">No. Anggota</label><br>
+                    <input type="text" id="no_anggota" name="no_anggota" required>
+                </p>
+                <p>
+                    <label for="alamat">Alamat</label><br>
+                    <input type="text" id="alamat" name="alamat">
+                </p>
+                <p>
+                    <label for="no_hp">No. HP</label><br>
+                    <input type="text" id="no_hp" name="no_hp">
+                </p>
+                <p>
+                    <button type="submit">Simpan</button>
+                </p>
+            </form>
+        </section>
+<?php include __DIR__ . '/../includes/footer.php'; ?>
